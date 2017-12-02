@@ -1,0 +1,19 @@
+group 'Cucumber-exercises'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'io.cucumber', name: 'cucumber-java', version: '2.1.0'
+    compile group: 'io.cucumber', name: 'cucumber-core', version: '2.1.0'
+   // compile group: 'info.cukes', name: 'cucumber-testng', version: '1.2.5'
+    //compile group: 'info.cukes', name: 'cucumber-jvm', version: '1.2.5'
+    compile group: 'io.cucumber', name: 'gherkin', version: '5.0.0'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.7.1'
+}
