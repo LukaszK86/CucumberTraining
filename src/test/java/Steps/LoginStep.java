@@ -33,9 +33,15 @@ public class LoginStep {
         List<User> users = new ArrayList<User>();
         users = table.asList(User.class);
 
-        for (User user: users) {
+        for (User user : users) {
             System.out.println("The username is " + user.username);
             System.out.println("The password is " + user.password);
         }
+    }
+
+    @And("^I enter ([^\"]*) and ([^\"]*)$")
+    public void iEnterUsernameAndPassword(String username, String password) throws Throwable {
+        System.out.println("The username is " + username);
+        System.out.println("The password is " + password);
     }
 }
