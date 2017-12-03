@@ -1,15 +1,16 @@
 package Steps;
 
 import Base.BaseUtil;
+import Pages.LoginPage;
 import Transformation.EmailTransform;
 import Transformation.SalaryCountTransformer;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.Transform;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import org.openqa.selenium.interactions.SourceType;
+import org.openqa.selenium.By;
+import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,33 +25,30 @@ public class LoginStep extends BaseUtil {
 
     @Then("^I should see the userform page$")
     public void iShouldSeeTheUserformPage() throws Throwable {
-        System.out.println("I should see the userform page\n");
-
-        System.out.println("The driver is: " + base.StepInfo);
+        Assert.assertEquals(base.driver.findElement(By.name("Initial")).isDisplayed(),true,"It's not displayed");
     }
 
     @Given("^I navigate to the login page$")
     public void iNavigateToTheLoginPage() throws Throwable {
         System.out.println("I navigate to the login page\n");
+        base.driver.navigate().to("http://executeautomation.com/demosite/Login.html");
     }
 
     @And("^I click login button$")
     public void iClickLoginButton() throws Throwable {
-        System.out.println("I click login button\n");
+        base.driver.findElement(By.name("Login")).submit();
     }
 
     @And("^I enter the following for Login$")
     public void iEnterTheFollowingForLogin(DataTable table) throws Throwable {
-//        List <List<String>> data = table.raw();
-//        System.out.println(data.get(0).get(0).toString());
-//        System.out.println(data.get(0).get(1).toString());
 
         List<User> users = new ArrayList<User>();
         users = table.asList(User.class);
 
+        LoginPage page = new LoginPage(base.driver);
+
         for (User user : users) {
-            System.out.println("The username is " + user.username);
-            System.out.println("The password is " + user.password);
+            page.Login(user.username,user.password);
         }
     }
 
@@ -67,7 +65,7 @@ public class LoginStep extends BaseUtil {
     }
 
     @And("^I verify the count of my salary digits for Rs (\\d+)$")
-    public void iVerifyTheCountOfMySalaryDigitsForRs(@Transform(SalaryCountTransformer.class)int salary) throws Throwable {
+    public void iVerifyTheCountOfMySalaryDigitsForRs(@Transform(SalaryCountTransformer.class) int salary) throws Throwable {
         System.out.println("My salary digits count is: " + salary);
     }
 }

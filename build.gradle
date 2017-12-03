@@ -17,4 +17,6 @@ dependencies {
     compile group: 'io.cucumber', name: 'gherkin', version: '5.0.0'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.7.1'
     compile group: 'info.cukes', name: 'cucumber-picocontainer', version: '1.2.5'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.8.0'
+    compile group: 'org.testng', name: 'testng', version: '6.13.1'
 }
