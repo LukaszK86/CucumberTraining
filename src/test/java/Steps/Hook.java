@@ -4,6 +4,7 @@ import Base.BaseUtil;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class Hook extends BaseUtil{
@@ -17,8 +18,8 @@ public class Hook extends BaseUtil{
     public void InitializeTest(){
         System.out.println("Opening the browser\n");
 
-        System.setProperty("geckodriver","C:\\Users\\lkaczmarczyk1\\Desktop\\Trening\\Drivers");
-        base.driver = new FirefoxDriver();
+        System.setProperty("webdriver.gecko.driver", "geckodriver.exe");
+        base.driver = new ChromeDriver();
     }
 
     @After
@@ -28,6 +29,8 @@ public class Hook extends BaseUtil{
             System.out.println(scenario.getName());
         }
         System.out.println("Closing the browser\n");
+
+        driver.quit();
     }
 
 

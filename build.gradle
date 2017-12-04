@@ -1,4 +1,4 @@
-group 'Cucumber-exercises'
+group 'Cucumber'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
@@ -9,11 +9,29 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    cucumberRuntime {
+        extendsFrom testRuntime
+    }
+}
+
+task cucumber() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "cucumber.api.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--plugin', 'html:target/site/cucumber-pretty', '--glue', 'steps', 'src/test/java']
+        }
+    }
+}
+
 dependencies {
-    // https://mvnrepository.com/artifact/info.cukes/cucumber-java
-//    compile group: 'info.cukes', name: 'cucumber-java', version: '1.2.5'
-//    // https://mvnrepository.com/artifact/info.cukes/cucumber-core
-//    compile group: 'info.cukes', name: 'cucumber-core', version: '1.2.5'
+
+ //    https://mvnrepository.com/artifact/info.cukes/cucumber-java
+   compile group: 'info.cukes', name: 'cucumber-java', version: '1.2.5'
+    // https://mvnrepository.com/artifact/info.cukes/cucumber-core
+   compile group: 'info.cukes', name: 'cucumber-core', version: '1.2.5'
 
     compile group: 'io.cucumber', name: 'cucumber-java', version: '2.1.0'
     compile group: 'io.cucumber', name: 'cucumber-core', version: '2.1.0'
@@ -24,7 +42,4 @@ dependencies {
     compile group: 'org.testng', name: 'testng', version: '6.13.1'
     compile group: 'info.cukes', name: 'cucumber-testng', version: '1.2.5'
 }
-
-
-
 
