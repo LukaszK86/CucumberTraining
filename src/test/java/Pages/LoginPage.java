@@ -27,7 +27,7 @@ public class LoginPage {
         txtPassword.sendKeys(password);
     }
 
-    public void ClickLogin()
+    public void clickLogin()
     {
         btnLogin.submit();
     }

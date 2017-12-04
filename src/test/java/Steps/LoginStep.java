@@ -25,7 +25,8 @@ public class LoginStep extends BaseUtil {
 
     @Then("^I should see the userform page$")
     public void iShouldSeeTheUserformPage() throws Throwable {
-        Assert.assertEquals(base.driver.findElement(By.name("Initial")).isDisplayed(),true,"It's not displayed");
+        Assert.assertTrue(base.getDriver().findElement(By.id("FirstName")).isDisplayed(),
+                "user form page");
     }
 
     @Given("^I navigate to the login page$")
